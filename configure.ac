@@ -40,6 +40,7 @@ SQ_CHECK_DECOMPRESS([XZ],[lzma],[lzma_stream_buffer_decode],[lzma.h],[liblzma],[
 SQ_CHECK_DECOMPRESS([LZO],[lzo2],[lzo1x_decompress_safe],[lzo/lzo1x.h],[lzo2],[lzo])
 SQ_CHECK_DECOMPRESS([LZ4],[lz4],[LZ4_decompress_safe],[lz4.h],[liblz4],[lz4])
 SQ_CHECK_DECOMPRESS([ZSTD],[zstd],[ZSTD_decompress],[zstd.h],[libzstd],[zstd])
+SQ_CHECK_DECOMPRESS([ZXC],[zxc],[zxc_decompress_block_safe],[zxc.h],[libzxc],[zxc])
 AS_IF([test "x$sq_decompressors" = x],
 	[AC_MSG_FAILURE([At least one decompression library must exist])])
 

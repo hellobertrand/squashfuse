@@ -1,4 +1,4 @@
-COMPRESSION_LIBS = $(ZLIB_LIBS) $(XZ_LIBS) $(LZO_LIBS) $(LZ4_LIBS) $(ZSTD_LIBS)
+COMPRESSION_LIBS = $(ZLIB_LIBS) $(XZ_LIBS) $(LZO_LIBS) $(LZ4_LIBS) $(ZSTD_LIBS) $(ZXC_LIBS)
 
 ACLOCAL_AMFLAGS = -I m4 --install
 
@@ -32,14 +32,14 @@ libsquashfuse_convenience_la_SOURCES = swap.c cache.c table.c dir.c file.c fs.c 
 	dir.h file.h decompress.h xattr.h squashfuse.h hash.h stack.h traverse.h \
 	util.h fs.h
 libsquashfuse_convenience_la_CPPFLAGS = $(ZLIB_CPPFLAGS) $(XZ_CPPFLAGS) $(LZO_CPPFLAGS) \
-	$(LZ4_CPPFLAGS) $(ZSTD_CPPFLAGS) $(FUSE_CPPFLAGS)
+	$(LZ4_CPPFLAGS) $(ZSTD_CPPFLAGS) $(ZXC_CPPFLAGS) $(FUSE_CPPFLAGS)
 libsquashfuse_convenience_la_LIBADD = $(COMPRESSION_LIBS)
 
 # Main library: libsquashfuse
 lib_LTLIBRARIES += libsquashfuse.la
 libsquashfuse_la_SOURCES =
 libsquashfuse_la_CPPFLAGS = $(ZLIB_CPPFLAGS) $(XZ_CPPFLAGS) $(LZO_CPPFLAGS) \
-	$(LZ4_CPPFLAGS) $(ZSTD_CPPFLAGS) $(FUSE_CPPFLAGS)
+	$(LZ4_CPPFLAGS) $(ZSTD_CPPFLAGS) $(ZXC_CPPFLAGS) $(FUSE_CPPFLAGS)
 libsquashfuse_la_LIBADD = libsquashfuse_convenience.la
 
 if SQ_WANT_FUSE
@@ -56,7 +56,7 @@ if SQ_WANT_HIGHLEVEL
 bin_PROGRAMS += squashfuse
 squashfuse_SOURCES = hl.c
 squashfuse_CPPFLAGS = $(ZLIB_CPPFLAGS) $(XZ_CPPFLAGS) $(LZO_CPPFLAGS) \
-	$(LZ4_CPPFLAGS) $(ZSTD_CPPFLAGS) $(FUSE_CPPFLAGS)
+	$(LZ4_CPPFLAGS) $(ZSTD_CPPFLAGS) $(ZXC_CPPFLAGS) $(FUSE_CPPFLAGS)
 squashfuse_LDADD = libsquashfuse_convenience.la libfuseprivate.la $(COMPRESSION_LIBS) $(FUSE_LIBS)
 dist_man_MANS += squashfuse.1
 endif
@@ -68,21 +68,21 @@ if SQ_WANT_LOWLEVEL
 noinst_LTLIBRARIES += libsquashfuse_ll_convenience.la
 libsquashfuse_ll_convenience_la_SOURCES = ll.c ll_inode.c nonstd-daemon.c
 libsquashfuse_ll_convenience_la_CPPFLAGS = $(ZLIB_CPPFLAGS) $(XZ_CPPFLAGS) $(LZO_CPPFLAGS) \
-	$(LZ4_CPPFLAGS) $(ZSTD_CPPFLAGS) $(FUSE_CPPFLAGS)
+	$(LZ4_CPPFLAGS) $(ZSTD_CPPFLAGS) $(ZXC_CPPFLAGS) $(FUSE_CPPFLAGS)
 libsquashfuse_ll_convenience_la_LIBADD = libsquashfuse_convenience.la libfuseprivate.la
 
 # squashfuse_ll library we will install
 lib_LTLIBRARIES += libsquashfuse_ll.la
 libsquashfuse_ll_la_SOURCES =
 libsquashfuse_ll_la_CPPFLAGS = $(ZLIB_CPPFLAGS) $(XZ_CPPFLAGS) $(LZO_CPPFLAGS) \
-	$(LZ4_CPPFLAGS) $(ZSTD_CPPFLAGS) $(FUSE_CPPFLAGS)
+	$(LZ4_CPPFLAGS) $(ZSTD_CPPFLAGS) $(ZXC_CPPFLAGS) $(FUSE_CPPFLAGS)
 libsquashfuse_ll_la_LIBADD = libsquashfuse_ll_convenience.la $(COMPRESSION_LIBS) $(FUSE_LIBS)
 
 # squashfuse_ll binary that's statically linked against internal libs
 bin_PROGRAMS += squashfuse_ll
 squashfuse_ll_SOURCES = ll_main.c
 squashfuse_ll_CPPFLAGS = $(ZLIB_CPPFLAGS) $(XZ_CPPFLAGS) $(LZO_CPPFLAGS) \
-	$(LZ4_CPPFLAGS) $(ZSTD_CPPFLAGS) $(FUSE_CPPFLAGS)
+	$(LZ4_CPPFLAGS) $(ZSTD_CPPFLAGS) $(ZXC_CPPFLAGS) $(FUSE_CPPFLAGS)
 squashfuse_ll_LDADD = libsquashfuse_ll_convenience.la $(COMPRESSION_LIBS) $(FUSE_LIBS)
 
 dist_man_MANS += squashfuse_ll.1

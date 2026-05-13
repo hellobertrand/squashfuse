@@ -131,6 +131,7 @@
 #define XZ_COMPRESSION		4
 #define LZ4_COMPRESSION		5
 #define ZSTD_COMPRESSION	6
+#define ZXC_COMPRESSION		7
 
 struct squashfs_super_block {
 	__le32			s_magic;
